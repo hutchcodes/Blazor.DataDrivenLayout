@@ -1,0 +1,52 @@
+﻿@using Blazor.DataDrivenLayout.App.Services
+@page "/fetchdata"
+@inject WeatherForecastService ForecastService
+@inject AppState appState
+@layout MainLayout
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+This page is demonstrating how the lifetime of the injected AppState can become problematic if you don't update it on every page.
+    </p>
+
+}
+
+@functions {
+WeatherForecast[] forecasts;
+
+protected override async Task OnInitAsync()
+{
+    forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    //appState.CurrentPageName = "Fetch Data";
+}
+}

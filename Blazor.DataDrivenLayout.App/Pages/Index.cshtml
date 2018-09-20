@@ -1,0 +1,19 @@
+﻿@page "/"
+@inherits AppStatePage
+
+<MainLayout2 AppState="@appState">
+    <h1>Hello, world!</h1>
+
+    Welcome to your new app.
+
+    <SurveyPrompt Title="How is Blazor working for you?" />
+</MainLayout2>
+
+@functions
+{
+    protected override void OnInit()
+    {
+        appState.CurrentPageName = "Home";
+        base.OnInit();
+    }
+}

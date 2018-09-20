@@ -1,0 +1,21 @@
+﻿@inherits BlazorLayoutComponent
+
+<div class="sidebar">
+    <NavMenu appState="@appState" />
+</div>
+
+<div class="main">
+    <div class="top-row px-4">
+        <a href="https://blazor.net" target="_blank" class="ml-md-auto">About</a>
+    </div>
+
+    <div class="content px-4">
+        @ChildContent
+    </div>
+</div>
+
+@functions
+{
+    [Parameter] protected AppState appState { get; set; }
+    [Parameter] protected RenderFragment ChildContent { get; set; }
+}
